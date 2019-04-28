@@ -2,25 +2,49 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
+export class App extends React.Component {
+  state = {
+    input: '',
+    list: []
+  }
+  handleInput = e => {
+    this.setState({
+      input: e.target.value
+    })
+    console.log('input state', this.state)
+  }
+  handleAdd = () => {
+    this.setState({
+      list: [...this.state.list, this.state.input]
+    })
+    console.log('add state', this.state)
+  }
+  render() {
+    const { list } = this.state
+    return (
+      <div className="App">
+        <header className="App-header">
+          <img src={logo} className="App-logo" alt="logo" />
+          <p>
+            Edit <code>src/App.js</code> and save to reload.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
+          <a
+            className="App-link"
+            href="https://reactjs.org"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Learn React
         </a>
-      </header>
-    </div>
-  );
+          <input placeholder="new item" onChange={this.handleInput}></input>
+          <button onClick={this.handleAdd}>Add</button>
+          <div>{list.map((item, i) => <div>{item}</div>
+          )}</div>
+
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
