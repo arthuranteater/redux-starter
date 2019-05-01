@@ -7,17 +7,20 @@ export class App extends React.Component {
     input: '',
     list: []
   }
+
   handleInput = e => {
+    //this.props.store.dispatch({ type: 'ADD_TO_DO', payload: { input: e.target.value } })
+    this.props.dispatch({ type: "ADD_TO_DO", payload: { id: 123, title: "Hello World" } })
     this.setState({
       input: e.target.value
     })
-    console.log('input state', this.state)
+    //console.log('input state', this.state)
   }
   handleAdd = () => {
     this.setState({
       list: [...this.state.list, this.state.input]
     })
-    console.log('add state', this.state)
+    //console.log('add state', this.state)
   }
   render() {
     const { list } = this.state
@@ -38,7 +41,7 @@ export class App extends React.Component {
         </a>
           <input placeholder="new item" onChange={this.handleInput}></input>
           <button onClick={this.handleAdd}>Add</button>
-          <div>{list.map((item, i) => <div>{item}</div>
+          <div>{list.map((item, i) => <div key={i}>{item}</div>
           )}</div>
 
         </header>
